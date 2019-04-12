@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MealPlannerDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DietProfile">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DietChoice" Type="int" Nullable="false" />
+          <Property Name="Gluten" Type="bit" Nullable="false" />
+          <Property Name="Peanut" Type="bit" Nullable="false" />
+          <Property Name="Eggs" Type="bit" Nullable="false" />
+          <Property Name="Dairy" Type="bit" Nullable="false" />
+          <Property Name="Soy" Type="bit" Nullable="false" />
+          <Property Name="Onion" Type="bit" Nullable="false" />
+          <Property Name="Nuts" Type="bit" Nullable="false" />
+          <Property Name="Seafood" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhysicalProfile">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="DoOption" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="Height" Type="float" Nullable="false" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="ActivityLevel" Type="int" Nullable="false" />
+          <Property Name="FinalWeight" Type="float" />
+          <Property Name="DaysToGo" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BMI" Type="float" />
+          <Property Name="SuggestedCalories" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DietProfile_ToTable">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DietProfile" Type="Self.DietProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="DietProfile">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhysicalProfile">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="PhysicalProfile" Type="Self.PhysicalProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="PhysicalProfile">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MealPlannerDbModelStoreContainer">
+          <EntitySet Name="DietProfile" EntityType="Self.DietProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhysicalProfile" EntityType="Self.PhysicalProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DietProfile_ToTable" Association="Self.FK_DietProfile_ToTable">
+            <End Role="User" EntitySet="User" />
+            <End Role="DietProfile" EntitySet="DietProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhysicalProfile" Association="Self.FK_PhysicalProfile">
+            <End Role="User" EntitySet="User" />
+            <End Role="PhysicalProfile" EntitySet="PhysicalProfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MealPlannerDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MealPlannerDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PhysicalProfiles" EntityType="MealPlannerDbModel.PhysicalProfile" />
+          <EntitySet Name="Users" EntityType="MealPlannerDbModel.User" />
+          <AssociationSet Name="FK_PhysicalProfile" Association="MealPlannerDbModel.FK_PhysicalProfile">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PhysicalProfile" EntitySet="PhysicalProfiles" />
+          </AssociationSet>
+          <EntitySet Name="DietProfiles" EntityType="MealPlannerDbModel.DietProfile" />
+          <AssociationSet Name="FK_DietProfile_ToTable" Association="MealPlannerDbModel.FK_DietProfile_ToTable">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DietProfile" EntitySet="DietProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PhysicalProfile">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="DoOption" Type="MealPlannerDbModel.DoOption" Nullable="false" />
+          <Property Name="Gender" Type="MealPlannerDbModel.Gender" Nullable="false" />
+          <Property Name="Height" Type="Double" Nullable="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="ActivityLevel" Type="MealPlannerDbModel.ActivityLevel" Nullable="false" />
+          <Property Name="FinalWeight" Type="Double" />
+          <Property Name="DaysToGo" Type="Int32" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMI" Type="Double" />
+          <Property Name="SuggestedCalories" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MealPlannerDbModel.FK_PhysicalProfile" FromRole="PhysicalProfile" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhysicalProfile" Relationship="MealPlannerDbModel.FK_PhysicalProfile" FromRole="User" ToRole="PhysicalProfile" />
+          <NavigationProperty Name="DietProfile" Relationship="MealPlannerDbModel.FK_DietProfile_ToTable" FromRole="User" ToRole="DietProfile" />
+        </EntityType>
+        <Association Name="FK_PhysicalProfile">
+          <End Type="MealPlannerDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="MealPlannerDbModel.PhysicalProfile" Role="PhysicalProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="PhysicalProfile">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="DoOption" a:ExternalTypeName="MealPlanner.DTO.Enums.DoOption" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="Gender" a:ExternalTypeName="MealPlanner.DTO.Enums.Gender" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ActivityLevel" a:ExternalTypeName="MealPlanner.DTO.Enums.ActivityLevel" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="DietProfile">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DietChoice" Type="MealPlannerDbModel.DietChoice" Nullable="false" />
+          <Property Name="Gluten" Type="Boolean" Nullable="false" />
+          <Property Name="Peanut" Type="Boolean" Nullable="false" />
+          <Property Name="Eggs" Type="Boolean" Nullable="false" />
+          <Property Name="Dairy" Type="Boolean" Nullable="false" />
+          <Property Name="Soy" Type="Boolean" Nullable="false" />
+          <Property Name="Onion" Type="Boolean" Nullable="false" />
+          <Property Name="Nuts" Type="Boolean" Nullable="false" />
+          <Property Name="Seafood" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="MealPlannerDbModel.FK_DietProfile_ToTable" FromRole="DietProfile" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_DietProfile_ToTable">
+          <End Type="MealPlannerDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="MealPlannerDbModel.DietProfile" Role="DietProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="DietProfile">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="DietChoice" a:ExternalTypeName="MealPlanner.DTO.Enums.DietChoice" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MealPlannerDbModelStoreContainer" CdmEntityContainer="MealPlannerDbEntities">
+          <EntitySetMapping Name="PhysicalProfiles">
+            <EntityTypeMapping TypeName="MealPlannerDbModel.PhysicalProfile">
+              <MappingFragment StoreEntitySet="PhysicalProfile">
+                <ScalarProperty Name="SuggestedCalories" ColumnName="SuggestedCalories" />
+                <ScalarProperty Name="BMI" ColumnName="BMI" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DaysToGo" ColumnName="DaysToGo" />
+                <ScalarProperty Name="FinalWeight" ColumnName="FinalWeight" />
+                <ScalarProperty Name="ActivityLevel" ColumnName="ActivityLevel" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DoOption" ColumnName="DoOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MealPlannerDbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DietProfiles">
+            <EntityTypeMapping TypeName="MealPlannerDbModel.DietProfile">
+              <MappingFragment StoreEntitySet="DietProfile">
+                <ScalarProperty Name="Seafood" ColumnName="Seafood" />
+                <ScalarProperty Name="Nuts" ColumnName="Nuts" />
+                <ScalarProperty Name="Onion" ColumnName="Onion" />
+                <ScalarProperty Name="Soy" ColumnName="Soy" />
+                <ScalarProperty Name="Dairy" ColumnName="Dairy" />
+                <ScalarProperty Name="Eggs" ColumnName="Eggs" />
+                <ScalarProperty Name="Peanut" ColumnName="Peanut" />
+                <ScalarProperty Name="Gluten" ColumnName="Gluten" />
+                <ScalarProperty Name="DietChoice" ColumnName="DietChoice" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

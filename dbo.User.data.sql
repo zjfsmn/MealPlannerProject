@@ -1,0 +1,3 @@
+﻿INSERT INTO [dbo].[User] ([UserId], [FirstName], [LastName], [Age], [Gender], [Height], [Weight], [ExerciseLevel]) VALUES (N'5629d381-b243-4a37-83c6-223e48b78613', N'test3', N'test3Last', 20, 1, 175, 145, 1)
+INSERT INTO [dbo].[User] ([UserId], [FirstName], [LastName], [Age], [Gender], [Height], [Weight], [ExerciseLevel]) VALUES (N'9107b843-aaf4-4c80-a74b-6a1ecae1e798', N'test2', N'test2Last', 30, 1, 165, 115, 1)
+INSERT INTO [dbo].[User] ([UserId], [FirstName], [LastName], [Age], [Gender], [Height], [Weight], [ExerciseLevel]) VALUES (N'cdcc1501-caa4-4a12-b309-a4d6ceab47c0', N'Test1', N'Test1Last', 25, 0, 170, 130, 2)

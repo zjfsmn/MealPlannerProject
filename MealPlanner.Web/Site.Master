@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="MealPlanner.Web.SignUp1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>SignUp</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/site.css" rel="stylesheet" />
+    
+</head>
+<body>
+
+
+    <form id="form1" runat="server">
+        
+        <div class="container align-content-lg-center">
+
+            <header>
+                <img src="../image/foodheader2.jpg" class="headerImage" />
+            </header>
+
+            <div class="row">
+               
+                    <nav class="nav">
+                        <a class="nav-link active" href="#">Home</a>
+                        
+
+                    </nav>
+           
+
+  </div>
+            <div class="align-content-center">
+                 <main >
+                    <div>
+                        <asp:ContentPlaceHolder ID="mainPlaceholder" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+
+
+                </main>
+
+            </div>
+
+               <br />
+                  <br />
+                  <br />
+
+
+
+          
+          
+
+
+            <footer class="text-center text-info">
+                @Engoy the Meal Planner.
+        
+            </footer>
+        </div>
+
+    </form>
+
+
+
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
